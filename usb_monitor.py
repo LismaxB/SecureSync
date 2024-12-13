@@ -28,9 +28,13 @@ def monitor_usb():
         while True:
             current_drives = set(detect_usb_drives())
             new_drives = current_drives - previously_detected
+            past_drives = previously_detected - current_drives
             if new_drives:
                 for drive in new_drives:
                     print(f"USB Drive Connected: {drive}")
+            if past_drives:
+                for drive in past_drives:
+                    print(f"USB Drive Disconnected: {drive}")
             previously_detected = current_drives
     except KeyboardInterrupt:
         print("Stopping USB monitoring...")
