@@ -2,6 +2,8 @@ import os
 import platform
 import psutil
 
+from backup import auto_backup
+
 def detect_usb_drives():
     usb_drives = []
     current_os = platform.system()
@@ -32,6 +34,7 @@ def monitor_usb():
             if new_drives:
                 for drive in new_drives:
                     print(f"USB Drive Connected: {drive}")
+                    auto_backup(drive, "./backup")
             if past_drives:
                 for drive in past_drives:
                     print(f"USB Drive Disconnected: {drive}")
